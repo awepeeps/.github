@@ -1,6 +1,6 @@
 # Awepeeps GitHub defaults
 
-Public community defaults for repositories owned by [Awepeeps](https://github.com/Awepeeps).
+Public community defaults for repositories owned by [awepeeps](https://github.com/awepeeps).
 
 The organization overview is maintained in `profile/README.md`.
 
