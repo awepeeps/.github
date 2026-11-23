@@ -17,4 +17,10 @@ Project-specific setup, session guidance, and validation remain in each project 
 
 Workflows, branch protection, repository settings, and agent instructions require explicit configuration. Merely placing them here does not apply them across the account.
 
+## Standards
+
+- [`standards/core.md`](standards/core.md) — the shared core, byte-identical in all five owner `.github` repositories.
+- [`standards/owner.md`](standards/owner.md) — scope, protection, required checks and owner rules for `awepeeps`.
+- `just core-drift` compares this core copy with the other four owners.
+
 See [GitHub's default community health file documentation](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file).
