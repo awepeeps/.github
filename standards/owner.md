@@ -72,9 +72,11 @@ express the needed query set, recorded in `docs/exceptions.md`.
 
 `minecraft-deployment`, `nicknames` and `test-discord` use three controls:
 
-1. `.githooks/pre-push`, installed by `just hooks`, refuses any push to
-   `refs/heads/main` and runs `gitleaks` over the outgoing commits. The hook is
-   committed, so it survives a clone; `just hooks` points Git at `.githooks`.
+1. `hooks/core.yml` and `hooks/owner.yml`, loaded through Lefthook at the
+   `hooks-v2` tag and installed by `just hooks`, refuse any push to
+   `refs/heads/main` and run `gitleaks` over the outgoing commits. The hook
+   configuration is committed, so it survives a clone; `just hooks` runs
+   `lefthook install` and asserts the remote jobs are present (C7.8).
 2. `.github/workflows/direct-push-guard.yml` runs on `push` to `main` and fails
    when the pushed commit has no merged pull request associated with it (a
    commits API lookup). A red run means the commit must be reverted and redone
@@ -129,6 +131,25 @@ artifacts with `cmp`, and prints the SHA-256 to the job summary. It runs on
 the 60-second target (C5.1, C5.4). A plugin whose required checks still exceed
 60 seconds records the measured median in `docs/exceptions.md` (C5.5); today
 that is `nicknames`, at 85 seconds.
+
+## Git hooks
+
+Hooks run through Lefthook, pinned in `mise.toml` as `"aqua:evilmartians/lefthook"` (C7.8). Each
+repository's `lefthook.yml` loads `hooks/core.yml` and `hooks/owner.yml` from this repository
+through `remotes` at the annotated tag `hooks-v2`, and adds its own jobs under names that never
+start with `core-` or `owner-`. Repositories migrate from the old `.githooks` launchers to Lefthook
+per core C7.8.
+
+This owner's `hooks/owner.yml` job runs before every commit:
+
+| Job                 | Recipe                    | Behaviour                                                                                                                                                                                                        |
+| ------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `owner-public-data` | `just public-data-staged` | In a public repository, fails when a staged file contains a host path, an IP address, world coordinates, a seed, or a server or instance ID. Exits 0 in a private repository, where instance values are allowed. |
+
+`just hooks` removes a local `core.hooksPath` only when it equals `.githooks`, refuses any other
+value or a global one, runs `lefthook install`, and then asserts that `lefthook dump` contains the
+`core-*` and `owner-*` jobs, because a failed remote fetch only warns. `lefthook-local.yml` is
+git-ignored, and agents never skip hooks: no `LEFTHOOK=0`, no `--no-verify` (C7.11).
 
 ## Owner rules
 
