@@ -1,0 +1,7 @@
+# The profile README belongs to the organization profile and is not formatted here.
+profile/README.md
+
+# Verbatim copies. standards/core.md must stay byte-identical across the five
+# owner repositories, and scripts/core-drift.ts is copied unchanged.
+standards/core.md
+scripts/core-drift.ts
