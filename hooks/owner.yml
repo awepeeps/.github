@@ -4,5 +4,5 @@
 pre-commit:
   jobs:
     - name: owner-public-data
-      run: just public-data-staged
+      run: mise exec -- just public-data-staged
       fail_text: "A staged file carries an instance value into a public repository. Replace it with a placeholder."

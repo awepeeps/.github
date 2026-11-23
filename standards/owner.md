@@ -73,7 +73,7 @@ express the needed query set, recorded in `docs/exceptions.md`.
 `minecraft-deployment`, `nicknames` and `test-discord` use three controls:
 
 1. `hooks/core.yml` and `hooks/owner.yml`, loaded through Lefthook at the
-   `hooks-v2` tag and installed by `just hooks`, refuse any push to
+   `hooks-v3` tag and installed by `just hooks`, refuse any push to
    `refs/heads/main` and run `gitleaks` over the outgoing commits. The hook
    configuration is committed, so it survives a clone; `just hooks` runs
    `lefthook install` and asserts the remote jobs are present (C7.8).
@@ -136,7 +136,7 @@ that is `nicknames`, at 85 seconds.
 
 Hooks run through Lefthook, pinned in `mise.toml` as `"aqua:evilmartians/lefthook"` (C7.8). Each
 repository's `lefthook.yml` loads `hooks/core.yml` and `hooks/owner.yml` from this repository
-through `remotes` at the annotated tag `hooks-v2`, and adds its own jobs under names that never
+through `remotes` at the annotated tag `hooks-v3`, and adds its own jobs under names that never
 start with `core-` or `owner-`. Repositories migrate from the old `.githooks` launchers to Lefthook
 per core C7.8.
 
