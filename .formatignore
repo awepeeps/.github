@@ -1,6 +1,8 @@
-# Verbatim copies. standards/core.md must stay byte-identical across the five
-# owner repositories, and scripts/core-drift.ts is copied unchanged.
+# Verbatim copies. standards/core.md and hooks/core.yml must stay byte-identical
+# across the five owner repositories, and scripts/core-drift.ts is copied
+# unchanged.
 standards/core.md
+hooks/core.yml
 scripts/core-drift.ts
 
 # The profile README belongs to the organization profile.

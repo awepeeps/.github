@@ -1,0 +1,8 @@
+# hooks/owner.yml — awepeeps owner hook jobs. Loaded with hooks/core.yml via remotes.
+# Every job calls a `just` recipe listed in standards/owner.md. Repository jobs
+# never reuse an `owner-*` name.
+pre-commit:
+  jobs:
+    - name: owner-public-data
+      run: just public-data-staged
+      fail_text: "A staged file carries an instance value into a public repository. Replace it with a placeholder."
