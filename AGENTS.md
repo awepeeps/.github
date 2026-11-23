@@ -20,10 +20,13 @@ repository standard shared by the five owner accounts.
 ## Commands
 
 - `just` lists the recipes.
+- `just install` installs the pinned tools from `mise.toml`.
 - `just fmt`, `just fmt-check` format the files this repository owns.
   `standards/core.md`, `scripts/core-drift.ts` and `profile/README.md` are
-  excluded in `.prettierignore`.
-- `just check` runs what CI requires.
+  excluded in `.formatignore`.
+- `just check` runs what CI requires (formatting plus the required-file check).
+- `just hooks` points Git at the committed `.githooks` directory.
+- `just agent-files` fails when `.agents/skills` and `.claude/skills` differ.
 - `just core-drift` compares the core copy with the other four owners.
 
 ## Rules
