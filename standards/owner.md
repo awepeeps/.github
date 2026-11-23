@@ -132,6 +132,9 @@ the 60-second target (C5.1, C5.4). A plugin whose required checks still exceed
 60 seconds records the measured median in `docs/exceptions.md` (C5.5); today
 that is `nicknames`, at 85 seconds.
 
+`just fleet-audit` re-derives this conformance list read-only, and `just fleet-audit --timing`
+adds the C5.1 median; `scripts/fleet-audit.ts` is the shared copy of the tool.
+
 ## Git hooks
 
 Hooks run through Lefthook, pinned in `mise.toml` as `"aqua:evilmartians/lefthook"` (C7.8). Each

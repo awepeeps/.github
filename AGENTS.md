@@ -36,3 +36,11 @@ repository standard shared by the five owner accounts.
   settings live in each repository.
 - No secrets, host paths, player names or instance values anywhere, including
   examples.
+
+## Auditing
+
+`just fleet-audit` checks every `awepeeps` repository against the core and owner standards and
+exits 1 on a gap. `just fleet-audit --timing` adds the C5.1 median pull request CI wall time;
+`--owner <owner>` narrows the scope and `--json` prints machine output. Rows in a repository's
+`docs/exceptions.md` are reported as excepted, not failures. The audit is read-only, needs `gh`
+logged in as both accounts, and runs locally rather than in CI.

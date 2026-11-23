@@ -4,6 +4,7 @@
 standards/core.md
 hooks/core.yml
 scripts/core-drift.ts
+scripts/fleet-audit.ts
 
 # The profile README belongs to the organization profile.
 profile/README.md
