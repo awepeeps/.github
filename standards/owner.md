@@ -137,7 +137,25 @@ adds the C5.1 median; `scripts/fleet-audit.ts` is the shared copy of the tool.
 
 ## CI-only required checks
 
-None.
+C5.7 makes the required pull-request checks the recipes the Lefthook hooks run. `check` and
+`secrets` are folded into the hooks: `pre-push-check` runs the fast recipes and the pre-push
+policy scans the exact pushed range. `hooks` stays CI-only because a hook cannot validate its
+own merged config.
+
+Within `check`, these recipes stay in CI because they exceed the hook budgets or need the
+network:
+
+| Repository                 | Recipe  | Why it is CI-only                             | Measured locally |
+| -------------------------- | ------- | --------------------------------------------- | ---------------- |
+| Java plugins               | `build` | The Gradle build and its tests.               |                  |
+| `minecraft-setup`          | `test`  | Over the 30 s pre-push budget.                | 32.8 s           |
+| `minecraft-deployment`     | `test`  | Over the 30 s pre-push budget.                | 82.9 s           |
+| `wow-forever-guild-report` | `audit` | `npm audit` needs the registry.               | 0.2 s            |
+| every repository           | `hooks` | A hook cannot validate its own merged config. |                  |
+
+The private repositories (`nicknames`, `minecraft-deployment`, `test-discord`) have no ruleset
+on the current plan, so nothing is a required check there. They record C5.8 in
+`docs/exceptions.md` with a 2027-03-01 revisit.
 
 ## Git hooks
 
